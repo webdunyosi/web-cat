@@ -30,7 +30,7 @@ const ProductsPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent mb-8 animate-fade-in">
+      <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent mb-8">
         Mahsulotlar
       </h1>
 
@@ -70,6 +70,15 @@ const ProductsPage = () => {
                 alt={product.name}
                 className="w-full h-64 object-cover cursor-pointer transition-transform duration-500 group-hover:scale-110 relative z-10"
                 onClick={() => setSelectedProduct(product)}
+                role="button"
+                aria-label={`${product.name} haqida batafsil ma'lumot`}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedProduct(product);
+                  }
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </div>
@@ -105,7 +114,7 @@ const ProductsPage = () => {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in"
+          className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedProduct(null)}
         >
           <div
