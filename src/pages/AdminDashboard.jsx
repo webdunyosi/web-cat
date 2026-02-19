@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaBox, FaDollarSign, FaShoppingBag, FaClock } from 'react-icons/fa';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -35,7 +36,7 @@ const AdminDashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg p-6 shadow-lg">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-3xl">📦</span>
+            <FaBox className="text-3xl" />
             <span className="text-sm opacity-80">Jami</span>
           </div>
           <div className="text-3xl font-bold mb-1">{stats.totalOrders}</div>
@@ -44,7 +45,7 @@ const AdminDashboard = () => {
 
         <div className="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-lg p-6 shadow-lg">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-3xl">💰</span>
+            <FaDollarSign className="text-3xl" />
             <span className="text-sm opacity-80">Jami</span>
           </div>
           <div className="text-2xl font-bold mb-1">
@@ -55,7 +56,7 @@ const AdminDashboard = () => {
 
         <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6 shadow-lg">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-3xl">🛍️</span>
+            <FaShoppingBag className="text-3xl" />
             <span className="text-sm opacity-80">Jami</span>
           </div>
           <div className="text-3xl font-bold mb-1">{stats.totalProducts}</div>
@@ -64,7 +65,7 @@ const AdminDashboard = () => {
 
         <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white rounded-lg p-6 shadow-lg">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-3xl">⏳</span>
+            <FaClock className="text-3xl" />
             <span className="text-sm opacity-80">Kutilmoqda</span>
           </div>
           <div className="text-3xl font-bold mb-1">{stats.pendingOrders}</div>

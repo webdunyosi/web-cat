@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { FaCat } from 'react-icons/fa';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -48,7 +49,9 @@ const RegisterPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-400 to-pink-300 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-purple-600 mb-2">🐱 Web Cat</h1>
+          <h1 className="text-4xl font-bold text-purple-600 mb-2 flex items-center justify-center gap-2">
+            <FaCat /> Web Cat
+          </h1>
           <p className="text-gray-600">Ro'yxatdan o'tish</p>
         </div>
 
