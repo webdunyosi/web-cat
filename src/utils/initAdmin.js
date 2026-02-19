@@ -1,4 +1,6 @@
 // Initialize admin user if it doesn't exist
+// NOTE: In production, passwords should be hashed using bcrypt or similar
+// This is a demo implementation using localStorage
 export const initializeAdmin = () => {
   const users = JSON.parse(localStorage.getItem('users') || '[]');
   
@@ -10,7 +12,7 @@ export const initializeAdmin = () => {
       id: 1,
       name: 'Admin',
       email: 'admin@webcat.uz',
-      password: 'admin123',
+      password: 'admin123', // TODO: In production, hash this password
       isAdmin: true,
       createdAt: new Date().toISOString()
     };

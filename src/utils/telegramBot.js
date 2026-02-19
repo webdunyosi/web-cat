@@ -1,3 +1,5 @@
+// NOTE: In production, these should be environment variables
+// For demo purposes, they are hardcoded as specified in requirements
 const BOT_TOKEN = '8554413508:AAEO0H1mA1aWkKxGpZ-PaLWQqysq0VH4Am0';
 const CHAT_ID = '5414733748';
 

@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
+    // Note: Clearing cart on logout - this is intentional behavior
     localStorage.removeItem('cart');
   };
 

@@ -28,6 +28,8 @@ const Register = () => {
       return;
     }
 
+    // NOTE: In production, passwords should be hashed before storing
+    // This is a demo implementation using localStorage
     // Get existing users
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     
@@ -37,12 +39,12 @@ const Register = () => {
       return;
     }
 
-    // Create new user
+    // Create new user (password should be hashed in production)
     const newUser = {
       id: Date.now(),
       name: formData.name,
       email: formData.email,
-      password: formData.password,
+      password: formData.password, // TODO: Hash password in production
       isAdmin: false,
       createdAt: new Date().toISOString()
     };

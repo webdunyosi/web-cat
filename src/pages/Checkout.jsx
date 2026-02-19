@@ -149,6 +149,9 @@ const Checkout = () => {
             <p className="text-3xl font-mono font-bold tracking-wider">
               8600 1234 5678 9012
             </p>
+            <p className="text-xs text-purple-100 mt-2">
+              ⚠️ Demo: Haqiqiy karta raqami emas
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">

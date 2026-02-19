@@ -16,6 +16,8 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
+    // NOTE: In production, passwords should be hashed and verified using bcrypt
+    // This is a demo implementation using localStorage
     // Get users from localStorage
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const user = users.find(u => u.email === formData.email && u.password === formData.password);
