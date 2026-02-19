@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "category": "ozuqalar",
+    "name": "Premium Mushuk Ovqati",
+    "price": 45000,
+    "image": "/ozuqalar/1.png",
+    "description": "Yuqori sifatli mushuklar uchun ozuqa. Barcha zarur vitaminlar bilan boyitilgan."
+  },
+  {
+    "id": "2",
+    "category": "ozuqalar",
+    "name": "Mushuk Konserva Ovqati",
+    "price": 25000,
+    "image": "/ozuqalar/2.png",
+    "description": "Ta'mi ajoyib konserva ovqati. Mushuklar sevib yeydi."
+  },
+  {
+    "id": "3",
+    "category": "ozuqalar",
+    "name": "Baliq Ta'mli Ovqat",
+    "price": 35000,
+    "image": "/ozuqalar/3.png",
+    "description": "Baliq ta'mli premium ozuqa. Mushuklar uchun eng yaxshi tanlov."
+  },
+  {
+    "id": "4",
+    "category": "buyumlar",
+    "name": "Mushuk O'yin Buyumlari",
+    "price": 15000,
+    "image": "/buyumlar/1.png",
+    "description": "Mushuklar uchun qiziqarli o'yin buyumlari to'plami."
+  },
+  {
+    "id": "5",
+    "category": "buyumlar",
+    "name": "Mushuk Turmagi",
+    "price": 120000,
+    "image": "/buyumlar/2.png",
+    "description": "Qulay va chiroyli mushuk turmagi. Uyingiz uchun ajoyib bezak."
+  },
+  {
+    "id": "6",
+    "category": "buyumlar",
+    "name": "Mushuk Taroqlari",
+    "price": 8000,
+    "image": "/buyumlar/3.png",
+    "description": "Sifatli taroqlar va tozalash buyumlari to'plami."
+  },
+  {
+    "id": "7",
+    "category": "mushuklar",
+    "name": "Britaniya Mushuki",
+    "price": 2500000,
+    "image": "/mushuklar/1.png",
+    "description": "Sof zot britaniya mushuki. Sog'lom va chiroyli."
+  },
+  {
+    "id": "8",
+    "category": "mushuklar",
+    "name": "Pers Mushuki",
+    "price": 3000000,
+    "image": "/mushuklar/2.png",
+    "description": "Sof zot pers mushuki. Juda chiroyli va mehribon."
+  },
+  {
+    "id": "9",
+    "category": "mushuklar",
+    "name": "Shotlandiya Mushuki",
+    "price": 2800000,
+    "image": "/mushuklar/3.png",
+    "description": "Sof zot shotlandiya mushuki. Uyda saqlash uchun ideal."
+  }
+]
