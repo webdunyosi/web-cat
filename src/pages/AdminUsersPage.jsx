@@ -9,36 +9,31 @@ const AdminUsersPage = () => {
     loadUsers();
   }, []);
 
-  const loadUsers = () => {
-    // Load admin users from users.json
-    import('../../data/users.json')
-      .then(module => {
-        const adminUsers = (module.default || []).map(user => ({
-          ...user,
-          id: `admin-${user.id}`
-        }));
-        
-        // Load regular users from registrants.json
+  const loadUsers = async () => {
+    try {
+      // Load both data sources in parallel
+      const [usersModule, registrantsModule] = await Promise.all([
+        import('../../data/users.json'),
         import('../../data/registrants.json')
-          .then(registrantsModule => {
-            const registrants = (registrantsModule.default || []).map(user => ({
-              ...user,
-              id: `user-${user.id}`
-            }));
-            
-            // Combine both arrays
-            const allUsers = [...adminUsers, ...registrants];
-            setUsers(allUsers);
-          })
-          .catch(error => {
-            console.error('Failed to load registrants:', error);
-            setUsers(adminUsers);
-          });
-      })
-      .catch(error => {
-        console.error('Failed to load users:', error);
-        setUsers([]);
-      });
+      ]);
+
+      const adminUsers = (usersModule.default || []).map(user => ({
+        ...user,
+        id: `admin-${user.id}`
+      }));
+
+      const registrants = (registrantsModule.default || []).map(user => ({
+        ...user,
+        id: `user-${user.id}`
+      }));
+
+      // Combine both arrays
+      const allUsers = [...adminUsers, ...registrants];
+      setUsers(allUsers);
+    } catch (error) {
+      console.error('Failed to load users:', error);
+      setUsers([]);
+    }
   };
 
   const filteredUsers = users.filter(user => {
@@ -188,7 +183,7 @@ const AdminUsersPage = () => {
                     <td className="px-6 py-4">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-bold">
-                          {user.fullName ? user.fullName.charAt(0).toUpperCase() : user.username.charAt(0).toUpperCase()}
+                          {(user.fullName || user.username).charAt(0).toUpperCase()}
                         </div>
                         <div>
                           <div className="text-sm font-medium text-gray-900">{user.fullName || user.username}</div>
