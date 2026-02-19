@@ -17,7 +17,7 @@ const CartPage = () => {
   const [showReceiptModal, setShowReceiptModal] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
 
-  const cardNumber = import.meta.env.VITE_PAYMENT_CARD_NUMBER || '8600 1234 5678 9012';
+  const cardNumber = '8600 1234 5678 9012';
 
   const handleCheckout = () => {
     if (cart.length === 0) {
