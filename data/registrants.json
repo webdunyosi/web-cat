@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "username": "alisher_karimov",
+    "password": "password123",
+    "fullName": "Alisher Karimov",
+    "email": "alisher.karimov@example.uz",
+    "phone": "+998 90 123 45 67",
+    "role": "user",
+    "registrationDate": "2024-01-15T10:30:00.000Z"
+  },
+  {
+    "id": "2",
+    "username": "dilnoza_rashidova",
+    "password": "password456",
+    "fullName": "Dilnoza Rashidova",
+    "email": "dilnoza.rashidova@example.uz",
+    "phone": "+998 91 234 56 78",
+    "role": "user",
+    "registrationDate": "2024-01-20T14:45:00.000Z"
+  }
+]
