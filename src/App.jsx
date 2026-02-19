@@ -11,6 +11,7 @@ import CartPage from './pages/CartPage';
 import OrdersPage from './pages/OrdersPage';
 import AboutPage from './pages/AboutPage';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminProductsPage from './pages/AdminProductsPage';
 
 // Layouts
 import UserLayout from './layouts/UserLayout';
@@ -108,7 +109,7 @@ const App = () => {
               element={
                 <ProtectedRoute adminOnly>
                   <AdminLayout>
-                    <ProductsPage />
+                    <AdminProductsPage />
                   </AdminLayout>
                 </ProtectedRoute>
               }
