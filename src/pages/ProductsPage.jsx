@@ -30,7 +30,9 @@ const ProductsPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Mahsulotlar</h1>
+      <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent mb-8">
+        Mahsulotlar
+      </h1>
 
       {/* Category Filter */}
       <div className="flex flex-wrap gap-3 mb-8">
@@ -41,14 +43,14 @@ const ProductsPage = () => {
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
               className={`
-                flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors
+                flex items-center space-x-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400
                 ${selectedCategory === category.id
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg ring-2 ring-purple-400'
+                  : 'bg-white text-gray-700 hover:bg-purple-50 hover:shadow-md shadow-sm'
                 }
               `}
             >
-              <IconComponent />
+              <IconComponent className="text-lg" />
               <span>{category.name}</span>
             </button>
           );
@@ -60,28 +62,40 @@ const ProductsPage = () => {
         {filteredProducts.map(product => (
           <div
             key={product.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
           >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-64 object-cover cursor-pointer"
-              onClick={() => setSelectedProduct(product)}
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            <div className="relative overflow-hidden">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-64 object-cover cursor-pointer transition-transform duration-500 group-hover:scale-110 relative z-10"
+                onClick={() => setSelectedProduct(product)}
+                role="button"
+                aria-label={`${product.name} haqida batafsil ma'lumot`}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedProduct(product);
+                  }
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            </div>
+            <div className="p-5">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
                 {product.name}
               </h3>
               <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                 {product.description}
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-2xl font-bold text-purple-600">
+                <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                   {product.price.toLocaleString()} so'm
                 </span>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-5 py-2 rounded-lg hover:shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-400 font-medium"
                 >
                   Savatga
                 </button>
@@ -92,7 +106,7 @@ const ProductsPage = () => {
       </div>
 
       {filteredProducts.length === 0 && (
-        <div className="text-center py-12">
+        <div className="text-center py-12 bg-white rounded-xl shadow-md">
           <p className="text-gray-500 text-lg">Mahsulotlar topilmadi</p>
         </div>
       )}
@@ -100,35 +114,38 @@ const ProductsPage = () => {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedProduct(null)}
         >
           <div
-            className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-auto"
+            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-auto shadow-2xl transform transition-all duration-300"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative">
+            <div className="relative overflow-hidden">
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-4 right-4 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100"
+                className="absolute top-4 right-4 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-400 z-10"
               >
-                <FaTimes />
+                <FaTimes className="text-gray-700" />
               </button>
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                className="w-full h-96 object-cover"
-              />
+              <div className="relative group">
+                <img
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  className="w-full h-96 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              </div>
             </div>
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
                 {selectedProduct.name}
               </h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-6 leading-relaxed">
                 {selectedProduct.description}
               </p>
-              <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-purple-600">
+              <div className="flex items-center justify-between bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-xl">
+                <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                   {selectedProduct.price.toLocaleString()} so'm
                 </span>
                 <button
@@ -136,7 +153,7 @@ const ProductsPage = () => {
                     handleAddToCart(selectedProduct);
                     setSelectedProduct(null);
                   }}
-                  className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400 font-medium"
                 >
                   Savatga qo'shish
                 </button>
