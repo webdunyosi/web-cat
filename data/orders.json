@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "orderId": "1734567890123",
+    "items": [
+      {
+        "id": "1",
+        "name": "Premium Mushuk Ovqati",
+        "price": 45000,
+        "quantity": 2,
+        "image": "/ozuqalar/1.png"
+      },
+      {
+        "id": "4",
+        "name": "Mushuk O'yin Buyumlari",
+        "price": 15000,
+        "quantity": 1,
+        "image": "/buyumlar/1.png"
+      }
+    ],
+    "total": 105000,
+    "customerName": "Dilshod Tursunov",
+    "phone": "+998901234567",
+    "address": "Toshkent shahar, Yunusobod tumani, 5-kvartal, 10-uy",
+    "cardNumber": "8600 1234 5678 9012",
+    "status": "pending",
+    "createdAt": "2024-12-18T10:30:00.000Z"
+  }
+]
