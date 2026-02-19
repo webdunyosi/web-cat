@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaBox } from 'react-icons/fa';
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
@@ -44,7 +45,7 @@ const OrdersPage = () => {
 
       {orders.length === 0 ? (
         <div className="bg-white rounded-lg shadow-md p-12 text-center">
-          <div className="text-6xl mb-4">📦</div>
+          <FaBox className="text-6xl mb-4 mx-auto text-gray-400" />
           <p className="text-xl text-gray-600 mb-4">Hali buyurtmalar yo'q</p>
         </div>
       ) : (

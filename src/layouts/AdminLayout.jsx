@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { FaCat, FaChartBar, FaShoppingBag, FaBox, FaUsers, FaBars } from 'react-icons/fa';
 
 const AdminLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -9,10 +10,10 @@ const AdminLayout = ({ children }) => {
   const { user, logout } = useAuth();
 
   const menuItems = [
-    { path: '/admin', label: 'Dashboard', icon: '📊' },
-    { path: '/admin/mahsulotlar', label: 'Mahsulotlar', icon: '🛍️' },
-    { path: '/admin/buyurtmalar', label: 'Buyurtmalar', icon: '📦' },
-    { path: '/admin/foydalanuvchilar', label: 'Foydalanuvchilar', icon: '👥' },
+    { path: '/admin', label: 'Dashboard', icon: FaChartBar },
+    { path: '/admin/mahsulotlar', label: 'Mahsulotlar', icon: FaShoppingBag },
+    { path: '/admin/buyurtmalar', label: 'Buyurtmalar', icon: FaBox },
+    { path: '/admin/foydalanuvchilar', label: 'Foydalanuvchilar', icon: FaUsers },
   ];
 
   const handleLogout = () => {
@@ -31,9 +32,11 @@ const AdminLayout = ({ children }) => {
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className="mr-4 md:hidden"
               >
-                <span className="text-2xl">☰</span>
+                <FaBars className="text-2xl" />
               </button>
-              <h1 className="text-2xl font-bold">🐱 Web Cat Admin</h1>
+              <h1 className="text-2xl font-bold flex items-center gap-2">
+                <FaCat /> Web Cat Admin
+              </h1>
             </div>
             <div className="flex items-center space-x-4">
               <span className="hidden sm:inline text-sm">{user?.fullName || user?.username}</span>
@@ -58,23 +61,26 @@ const AdminLayout = ({ children }) => {
           `}
         >
           <nav className="p-4 space-y-2">
-            {menuItems.map(item => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`
-                  flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
-                  ${location.pathname === item.path
-                    ? 'bg-purple-100 text-purple-700'
-                    : 'text-gray-700 hover:bg-gray-100'
-                  }
-                `}
-                onClick={() => setSidebarOpen(false)}
-              >
-                <span className="text-xl">{item.icon}</span>
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            ))}
+            {menuItems.map(item => {
+              const IconComponent = item.icon;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`
+                    flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
+                    ${location.pathname === item.path
+                      ? 'bg-purple-100 text-purple-700'
+                      : 'text-gray-700 hover:bg-gray-100'
+                    }
+                  `}
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <IconComponent className="text-xl" />
+                  <span className="font-medium">{item.label}</span>
+                </Link>
+              );
+            })}
           </nav>
         </aside>
 
