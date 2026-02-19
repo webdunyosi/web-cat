@@ -45,7 +45,7 @@ const ProductsPage = () => {
               className={`
                 flex items-center space-x-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400
                 ${selectedCategory === category.id
-                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg transform scale-105 ring-2 ring-purple-400'
+                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg ring-2 ring-purple-400'
                   : 'bg-white text-gray-700 hover:bg-purple-50 hover:shadow-md shadow-sm'
                 }
               `}
@@ -118,7 +118,7 @@ const ProductsPage = () => {
           onClick={() => setSelectedProduct(null)}
         >
           <div
-            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-auto shadow-2xl transform transition-all duration-300 scale-100 hover:scale-[1.01]"
+            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-auto shadow-2xl transform transition-all duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative overflow-hidden">
