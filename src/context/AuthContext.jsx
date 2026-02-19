@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { sendRegistrationToTelegram } from '../services/telegramService';
+import registrantsData from '../../data/registrants.json';
 
 const AuthContext = createContext(null);
 
@@ -30,6 +31,26 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(userData));
       return { success: true };
     }
+    
+    // Check registrants from registrants.json
+    const registrant = registrantsData.find(
+      (reg) => reg.username === username && reg.password === password
+    );
+    
+    if (registrant) {
+      const userData = {
+        id: registrant.id,
+        username: registrant.username,
+        role: registrant.role || 'user',
+        fullName: registrant.fullName,
+        email: registrant.email,
+        phone: registrant.phone
+      };
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      return { success: true };
+    }
+    
     return { success: false, error: 'Noto\'g\'ri login yoki parol' };
   };
 
