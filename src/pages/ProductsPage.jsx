@@ -70,7 +70,7 @@ const ProductsPage = () => {
             key={`${product.id}-${animationKey}`}
             className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 group product-fade-in"
             style={{
-              animationDelay: `${index * 0.1}s`
+              animationDelay: `${Math.min(index * 0.1, 1.5)}s`
             }}
           >
             <div className="relative overflow-hidden">
