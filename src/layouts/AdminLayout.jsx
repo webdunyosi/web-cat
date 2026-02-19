@@ -30,7 +30,7 @@ const AdminLayout = ({ children }) => {
             <div className="flex items-center">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="mr-4 md:hidden hover:bg-white/20 p-2 rounded-lg transition-all duration-200"
+                className="mr-4 md:hidden hover:bg-white/20 p-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-white focus:outline-none"
               >
                 <FaBars className="text-xl" />
               </button>
@@ -42,7 +42,7 @@ const AdminLayout = ({ children }) => {
               <span className="hidden sm:inline text-sm font-medium">{user?.fullName || user?.username}</span>
               <button
                 onClick={handleLogout}
-                className="bg-white text-purple-700 px-4 py-1.5 rounded-full hover:bg-purple-50 text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-md"
+                className="bg-white text-purple-700 px-4 py-1.5 rounded-full hover:bg-purple-50 text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-md focus:ring-2 focus:ring-white focus:outline-none"
               >
                 Chiqish
               </button>
