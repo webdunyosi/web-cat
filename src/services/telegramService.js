@@ -1,9 +1,7 @@
 const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
-export const sendOrderToTelegram = async (orderData) => {
-  const message = formatOrderMessage(orderData);
-  
+const sendMessageToTelegram = async (message) => {
   try {
     const response = await fetch(
       `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
@@ -31,6 +29,16 @@ export const sendOrderToTelegram = async (orderData) => {
   }
 };
 
+export const sendOrderToTelegram = async (orderData) => {
+  const message = formatOrderMessage(orderData);
+  return await sendMessageToTelegram(message);
+};
+
+export const sendRegistrationToTelegram = async (userData) => {
+  const message = formatRegistrationMessage(userData);
+  return await sendMessageToTelegram(message);
+};
+
 const formatOrderMessage = (orderData) => {
   const { orderId, items, total, customerName, phone, cardNumber } = orderData;
   
@@ -45,6 +53,20 @@ const formatOrderMessage = (orderData) => {
   
   message += `\n<b>💰 Jami:</b> ${total.toLocaleString()} so'm\n`;
   message += `<b>💳 Karta raqami:</b> ${cardNumber}\n\n`;
+  message += `⏰ Sana: ${new Date().toLocaleString('uz-UZ')}`;
+  
+  return message;
+};
+
+const formatRegistrationMessage = (userData) => {
+  const { username, fullName, email, phone, id } = userData;
+  
+  let message = `<b>✅ Yangi Foydalanuvchi Ro'yxatdan O'tdi!</b>\n\n`;
+  message += `<b>🆔 ID:</b> ${id}\n`;
+  message += `<b>👤 To'liq ism:</b> ${fullName}\n`;
+  message += `<b>📝 Username:</b> ${username}\n`;
+  message += `<b>📧 Email:</b> ${email}\n`;
+  message += `<b>📱 Telefon:</b> ${phone}\n\n`;
   message += `⏰ Sana: ${new Date().toLocaleString('uz-UZ')}`;
   
   return message;
