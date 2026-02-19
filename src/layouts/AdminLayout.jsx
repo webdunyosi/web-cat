@@ -34,8 +34,8 @@ const AdminLayout = ({ children }) => {
               >
                 <FaBars className="text-xl" />
               </button>
-              <h1 className="text-2xl font-bold flex items-center gap-2 hover:scale-105 transition-transform duration-200">
-                <FaCat className="animate-pulse" /> Web Cat Admin
+              <h1 className="text-2xl font-bold flex items-center gap-2 group hover:scale-105 transition-transform duration-200">
+                <FaCat className="group-hover:scale-110 transition-transform duration-200" /> Web Cat Admin
               </h1>
             </div>
             <div className="flex items-center space-x-3 md:space-x-4 bg-white/10 rounded-full px-3 py-1.5 backdrop-blur-sm">

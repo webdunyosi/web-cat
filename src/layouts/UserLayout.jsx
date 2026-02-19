@@ -35,8 +35,8 @@ const UserLayout = ({ children }) => {
               >
                 <FaBars className="text-xl" />
               </button>
-              <h1 className="text-2xl font-bold text-white flex items-center gap-2 hover:scale-105 transition-transform duration-200">
-                <FaCat className="animate-pulse" /> Web Cat
+              <h1 className="text-2xl font-bold text-white flex items-center gap-2 group hover:scale-105 transition-transform duration-200">
+                <FaCat className="group-hover:scale-110 transition-transform duration-200" /> Web Cat
               </h1>
             </div>
             <div className="flex items-center space-x-3 md:space-x-4">
@@ -46,7 +46,7 @@ const UserLayout = ({ children }) => {
               >
                 <FaShoppingCart className="text-xl md:text-2xl" />
                 {cart.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shadow-lg animate-bounce">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shadow-lg">
                     {cart.length}
                   </span>
                 )}
