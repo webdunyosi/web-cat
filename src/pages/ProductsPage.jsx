@@ -7,11 +7,17 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [animationKey, setAnimationKey] = useState(0);
   const { addToCart } = useCart();
 
   useEffect(() => {
     setProducts(productsData);
   }, []);
+
+  // Trigger animation when category changes
+  useEffect(() => {
+    setAnimationKey(prev => prev + 1);
+  }, [selectedCategory]);
 
   const filteredProducts = selectedCategory === 'all'
     ? products
@@ -59,10 +65,13 @@ const ProductsPage = () => {
 
       {/* Products Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProducts.map(product => (
+        {filteredProducts.map((product, index) => (
           <div
-            key={product.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
+            key={`${product.id}-${animationKey}`}
+            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 group product-fade-in"
+            style={{
+              animationDelay: `${Math.min(index * 0.1, 1.5)}s`
+            }}
           >
             <div className="relative overflow-hidden">
               <img

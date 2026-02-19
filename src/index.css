@@ -3,7 +3,24 @@
 /* Respect user's motion preferences for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .animate-pulse,
-  .animate-bounce {
-    animation: none;
+  .animate-bounce,
+  .product-fade-in {
+    animation: none !important;
   }
+}
+
+/* Product fade-in animation */
+@keyframes productFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-fade-in {
+  animation: productFadeIn 0.5s ease-out both;
 }
