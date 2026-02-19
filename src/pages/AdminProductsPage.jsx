@@ -24,11 +24,16 @@ const AdminProductsPage = () => {
       setProducts(JSON.parse(stored));
     } else {
       // Load from JSON file if no products in localStorage
-      import('../../data/products.json').then(module => {
-        const defaultProducts = module.default;
-        setProducts(defaultProducts);
-        localStorage.setItem('products', JSON.stringify(defaultProducts));
-      });
+      import('../../data/products.json')
+        .then(module => {
+          const defaultProducts = module.default;
+          setProducts(defaultProducts);
+          localStorage.setItem('products', JSON.stringify(defaultProducts));
+        })
+        .catch(error => {
+          console.error('Failed to load products:', error);
+          setProducts([]);
+        });
     }
   };
 
@@ -48,7 +53,7 @@ const AdminProductsPage = () => {
   const openAddModal = () => {
     setEditingProduct(null);
     setFormData({
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       name: '',
       category: 'ozuqalar',
       price: '',
@@ -76,7 +81,7 @@ const AdminProductsPage = () => {
     
     const productData = {
       ...formData,
-      price: parseInt(formData.price)
+      price: parseInt(formData.price, 10)
     };
 
     let updatedProducts;
@@ -286,9 +291,6 @@ const AdminProductsPage = () => {
                       src={formData.image}
                       alt="Preview"
                       className="w-32 h-32 object-cover rounded border"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                      }}
                     />
                   </div>
                 )}
