@@ -1,0 +1,10 @@
+[
+  {
+    "id": "1",
+    "username": "admin",
+    "password": "admin123",
+    "role": "admin",
+    "fullName": "Administrator",
+    "email": "admin@webcat.uz"
+  }
+]
