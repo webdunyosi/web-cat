@@ -49,3 +49,46 @@ const formatOrderMessage = (orderData) => {
   
   return message;
 };
+
+export const sendRegistrationToTelegram = async (userData) => {
+  const message = formatRegistrationMessage(userData);
+  
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: 'HTML',
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Telegramga yuborishda xatolik: ${response.status} ${response.statusText}`);
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error('Telegram xatolik:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+const formatRegistrationMessage = (userData) => {
+  const { fullName, username, email, phone } = userData;
+  
+  let message = `<b>👤 Yangi Foydalanuvchi Ro'yxatdan O'tdi!</b>\n\n`;
+  message += `<b>📝 To'liq ism:</b> ${fullName}\n`;
+  message += `<b>👤 Username:</b> ${username}\n`;
+  message += `<b>📧 Email:</b> ${email}\n`;
+  message += `<b>📱 Telefon:</b> ${phone}\n\n`;
+  message += `⏰ Sana: ${new Date().toLocaleString('uz-UZ')}`;
+  
+  return message;
+};
