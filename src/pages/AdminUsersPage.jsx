@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { FaUser, FaEnvelope, FaPhone, FaCalendar, FaUserShield, FaUsers as FaUsersIcon } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaCalendar, FaUserShield, FaUsers as FaUsersIcon, FaSearch } from 'react-icons/fa';
 
 const AdminUsersPage = () => {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState('all'); // 'all', 'admin', 'user'
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     loadUsers();
@@ -37,8 +38,13 @@ const AdminUsersPage = () => {
   };
 
   const filteredUsers = users.filter(user => {
-    if (filter === 'all') return true;
-    return user.role === filter;
+    const matchesRole = filter === 'all' || user.role === filter;
+    const query = searchQuery.toLowerCase();
+    const matchesSearch = !query ||
+      (user.fullName || '').toLowerCase().includes(query) ||
+      (user.username || '').toLowerCase().includes(query) ||
+      (user.email || '').toLowerCase().includes(query);
+    return matchesRole && matchesSearch;
   });
 
   const formatDate = (dateString) => {
@@ -54,164 +60,190 @@ const AdminUsersPage = () => {
   const getRoleBadge = (role) => {
     if (role === 'admin') {
       return (
-        <span className="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 flex items-center space-x-1">
-          <FaUserShield />
-          <span>Admin</span>
+        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700 ring-1 ring-red-200">
+          <FaUserShield className="text-[10px]" />
+          Admin
         </span>
       );
     }
     return (
-      <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center space-x-1">
-        <FaUser />
-        <span>Foydalanuvchi</span>
+      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 ring-1 ring-blue-200">
+        <FaUser className="text-[10px]" />
+        Foydalanuvchi
       </span>
     );
   };
 
-  const stats = {
-    total: users.length,
-    admins: users.filter(u => u.role === 'admin').length,
-    regularUsers: users.filter(u => u.role === 'user').length
-  };
+  const stats = [
+    {
+      label: 'Jami foydalanuvchilar',
+      value: users.length,
+      icon: FaUsersIcon,
+      gradient: 'from-violet-500 to-purple-600',
+      bg: 'bg-violet-50',
+      text: 'text-violet-600',
+    },
+    {
+      label: 'Administratorlar',
+      value: users.filter(u => u.role === 'admin').length,
+      icon: FaUserShield,
+      gradient: 'from-red-400 to-rose-500',
+      bg: 'bg-red-50',
+      text: 'text-red-600',
+    },
+    {
+      label: 'Oddiy foydalanuvchilar',
+      value: users.filter(u => u.role === 'user').length,
+      icon: FaUser,
+      gradient: 'from-blue-400 to-indigo-500',
+      bg: 'bg-blue-50',
+      text: 'text-blue-600',
+    },
+  ];
+
+  const filterTabs = [
+    { key: 'all', label: 'Hammasi', count: users.length },
+    { key: 'admin', label: 'Adminlar', count: users.filter(u => u.role === 'admin').length },
+    { key: 'user', label: 'Foydalanuvchilar', count: users.filter(u => u.role === 'user').length },
+  ];
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Foydalanuvchilarni boshqarish</h1>
-        <p className="text-gray-600">Tizimda ro'yxatdan o'tgan barcha foydalanuvchilar</p>
+    <div className="max-w-7xl mx-auto space-y-6">
+
+      {/* Page Header */}
+      <div className="bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
+            <FaUsersIcon /> Foydalanuvchilarni boshqarish
+          </h1>
+          <p className="text-purple-200 mt-1 text-sm">Tizimda ro'yxatdan o'tgan barcha foydalanuvchilar</p>
+        </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg p-6 shadow-lg">
-          <div className="flex items-center justify-between mb-2">
-            <FaUsersIcon className="text-3xl" />
-            <span className="text-sm opacity-80">Jami</span>
-          </div>
-          <div className="text-3xl font-bold mb-1">{stats.total}</div>
-          <div className="text-sm opacity-90">Foydalanuvchi</div>
-        </div>
-
-        <div className="bg-gradient-to-br from-red-500 to-red-600 text-white rounded-lg p-6 shadow-lg">
-          <div className="flex items-center justify-between mb-2">
-            <FaUserShield className="text-3xl" />
-            <span className="text-sm opacity-80">Jami</span>
-          </div>
-          <div className="text-3xl font-bold mb-1">{stats.admins}</div>
-          <div className="text-sm opacity-90">Administrator</div>
-        </div>
-
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6 shadow-lg">
-          <div className="flex items-center justify-between mb-2">
-            <FaUser className="text-3xl" />
-            <span className="text-sm opacity-80">Jami</span>
-          </div>
-          <div className="text-3xl font-bold mb-1">{stats.regularUsers}</div>
-          <div className="text-sm opacity-90">Oddiy foydalanuvchi</div>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {stats.map((stat, idx) => {
+          const Icon = stat.icon;
+          return (
+            <div key={idx} className={`${stat.bg} rounded-xl p-4 flex items-center gap-4 shadow-sm border border-white`}>
+              <div className={`bg-gradient-to-br ${stat.gradient} text-white w-11 h-11 rounded-xl flex items-center justify-center shadow-md flex-shrink-0`}>
+                <Icon className="text-lg" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-2xl font-bold text-gray-800">{stat.value}</p>
+                <p className={`text-xs font-medium ${stat.text}`}>{stat.label}</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Filter Buttons */}
-      <div className="flex space-x-2 mb-6">
-        <button
-          onClick={() => setFilter('all')}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-            filter === 'all'
-              ? 'bg-purple-600 text-white shadow-md'
-              : 'bg-white text-gray-700 hover:bg-gray-100 border'
-          }`}
-        >
-          Hammasi ({stats.total})
-        </button>
-        <button
-          onClick={() => setFilter('admin')}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-            filter === 'admin'
-              ? 'bg-red-600 text-white shadow-md'
-              : 'bg-white text-gray-700 hover:bg-gray-100 border'
-          }`}
-        >
-          Adminlar ({stats.admins})
-        </button>
-        <button
-          onClick={() => setFilter('user')}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-            filter === 'user'
-              ? 'bg-blue-600 text-white shadow-md'
-              : 'bg-white text-gray-700 hover:bg-gray-100 border'
-          }`}
-        >
-          Foydalanuvchilar ({stats.regularUsers})
-        </button>
+      {/* Search & Filter Bar */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex flex-col sm:flex-row gap-3">
+        <div className="relative flex-1">
+          <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Ism, foydalanuvchi nomi yoki email bo'yicha qidiring..."
+            aria-label="Foydalanuvchilarni qidirish"
+            className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+          />
+        </div>
+        <div className="flex gap-2 flex-wrap">
+          {filterTabs.map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => setFilter(tab.key)}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150 ${
+                filter === tab.key
+                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {tab.label}
+              <span className={`ml-1.5 text-xs px-1.5 py-0.5 rounded-full ${
+                filter === tab.key ? 'bg-white/20 text-white' : 'bg-white text-gray-500'
+              }`}>
+                {tab.count}
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Users Table */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+          <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">
+            Foydalanuvchilar ro'yxati
+          </span>
+          <span className="bg-purple-100 text-purple-700 text-xs font-bold px-2.5 py-1 rounded-full">
+            {filteredUsers.length} ta
+          </span>
+        </div>
         <div className="overflow-x-auto">
           {filteredUsers.length === 0 ? (
-            <div className="p-12 text-center text-gray-500">
-              <FaUsersIcon className="text-5xl mx-auto mb-4 text-gray-300" />
-              <p className="text-lg">Foydalanuvchilar topilmadi</p>
+            <div className="p-12 text-center flex flex-col items-center gap-3 text-gray-400">
+              <FaUsersIcon className="text-5xl text-gray-200" />
+              <p className="text-sm font-medium">Foydalanuvchilar topilmadi</p>
             </div>
           ) : (
             <table className="w-full">
-              <thead className="bg-gray-50 border-b">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    ID
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    Foydalanuvchi
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    Aloqa ma'lumotlari
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    Rol
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    Ro'yxatdan o'tgan
-                  </th>
+              <thead>
+                <tr className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">ID</th>
+                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Foydalanuvchi</th>
+                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Aloqa ma'lumotlari</th>
+                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Rol</th>
+                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Ro'yxatdan o'tgan</th>
                 </tr>
               </thead>
-              <tbody className="divide-y">
-                {filteredUsers.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm font-mono text-gray-500">#{user.id}</span>
+              <tbody className="divide-y divide-gray-100">
+                {filteredUsers.map((user, index) => (
+                  <tr
+                    key={user.id}
+                    className={`transition-colors duration-150 hover:bg-purple-50/50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}
+                  >
+                    <td className="px-6 py-3.5 whitespace-nowrap">
+                      <span className="text-sm font-mono font-semibold text-gray-500">#{user.id}</span>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-bold">
+                    <td className="px-6 py-3.5">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-violet-600 flex items-center justify-center text-white font-bold shadow-md flex-shrink-0"
+                          aria-label={`Avatar for ${user.fullName || user.username}`}
+                        >
                           {(user.fullName || user.username).charAt(0).toUpperCase()}
                         </div>
-                        <div>
-                          <div className="text-sm font-medium text-gray-900">{user.fullName || user.username}</div>
-                          <div className="text-sm text-gray-500">@{user.username}</div>
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-gray-800 truncate">{user.fullName || user.username}</p>
+                          <p className="text-xs text-gray-400">@{user.username}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-3.5">
                       <div className="space-y-1">
                         {user.email && (
-                          <div className="flex items-center space-x-2 text-sm text-gray-700">
-                            <FaEnvelope className="text-gray-400" />
-                            <span>{user.email}</span>
+                          <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <FaEnvelope className="text-gray-400 flex-shrink-0" />
+                            <span className="truncate">{user.email}</span>
                           </div>
                         )}
                         {user.phone && (
-                          <div className="flex items-center space-x-2 text-sm text-gray-700">
-                            <FaPhone className="text-gray-400" />
+                          <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <FaPhone className="text-gray-400 flex-shrink-0" />
                             <span>{user.phone}</span>
                           </div>
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-3.5 whitespace-nowrap">
                       {getRoleBadge(user.role)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center space-x-2 text-sm text-gray-700">
+                    <td className="px-6 py-3.5 whitespace-nowrap">
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
                         <FaCalendar className="text-gray-400" />
                         <span>{formatDate(user.registrationDate)}</span>
                       </div>
