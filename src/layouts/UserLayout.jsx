@@ -68,10 +68,10 @@ const UserLayout = ({ children }) => {
           className={`
             fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out mt-16
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-            md:relative md:translate-x-0 md:mt-0
+            md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:translate-x-0 md:mt-0
           `}
         >
-          <nav className="p-4 space-y-2">
+          <nav className="p-4 space-y-2 overflow-y-auto h-full">
             {menuItems.map(item => {
               const IconComponent = item.icon;
               return (
