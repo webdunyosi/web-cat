@@ -1,5 +1,5 @@
-const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+const TELEGRAM_BOT_TOKEN = '8554413508:AAEO0H1mA1aWkKxGpZ-PaLWQqysq0VH4Am0';
+const TELEGRAM_CHAT_ID = '5414733748';
 
 export const sendOrderToTelegram = async (orderData) => {
   const message = formatOrderMessage(orderData);
