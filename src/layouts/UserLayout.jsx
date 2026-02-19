@@ -63,9 +63,9 @@ const UserLayout = ({ children }) => {
         {/* Sidebar */}
         <aside
           className={`
-            fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out mt-16
+            fixed top-16 left-0 bottom-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out overflow-y-auto
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-            md:relative md:translate-x-0 md:mt-0
+            md:translate-x-0
           `}
         >
           <nav className="p-4 space-y-2">
@@ -90,7 +90,7 @@ const UserLayout = ({ children }) => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 md:p-8">
+        <main className="flex-1 p-4 md:p-8 md:ml-64">
           {children}
         </main>
       </div>
