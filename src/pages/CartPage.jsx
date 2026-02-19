@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { sendOrderToTelegram } from '../services/telegramService';
-import { FaShoppingCart, FaTrash, FaCheckCircle, FaCreditCard } from 'react-icons/fa';
+import { FaShoppingCart, FaTrash, FaCheckCircle, FaCreditCard, FaTimes, FaUser, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 
 const CartPage = () => {
   const { cart, removeFromCart, updateQuantity, getTotal, clearCart } = useCart();
@@ -147,15 +147,26 @@ const CartPage = () => {
 
       {/* Checkout Modal */}
       {showCheckoutModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl transform transition-all duration-300">
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
-              Ma'lumotlarni kiriting
-            </h2>
-            <div className="space-y-4">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 backdrop-fade">
+          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl overflow-hidden modal-enter">
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-5 flex items-center justify-between">
               <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  To'liq ism
+                <h2 className="text-xl font-bold text-white">Ma'lumotlarni kiriting</h2>
+                <p className="text-purple-200 text-sm mt-0.5">Buyurtmani rasmiylashtirish</p>
+              </div>
+              <button
+                onClick={() => setShowCheckoutModal(false)}
+                className="text-white/80 hover:text-white hover:bg-white/20 p-2 rounded-xl transition-all duration-150"
+              >
+                <FaTimes className="text-lg" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                  <FaUser className="inline mr-1.5 text-purple-500" />To'liq ism
                 </label>
                 <input
                   type="text"
@@ -163,13 +174,14 @@ const CartPage = () => {
                   onChange={(e) =>
                     setCheckoutData({ ...checkoutData, customerName: e.target.value })
                   }
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-200"
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition placeholder-gray-400"
+                  placeholder="Ismingizni kiriting"
                   required
                 />
               </div>
               <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  Telefon
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                  <FaPhone className="inline mr-1.5 text-purple-500" />Telefon
                 </label>
                 <input
                   type="tel"
@@ -177,46 +189,49 @@ const CartPage = () => {
                   onChange={(e) =>
                     setCheckoutData({ ...checkoutData, phone: e.target.value })
                   }
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-200"
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition placeholder-gray-400"
+                  placeholder="+998 XX XXX XX XX"
                   required
                 />
               </div>
               <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  Manzil
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                  <FaMapMarkerAlt className="inline mr-1.5 text-purple-500" />Manzil
                 </label>
                 <textarea
                   value={checkoutData.address}
                   onChange={(e) =>
                     setCheckoutData({ ...checkoutData, address: e.target.value })
                   }
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-200"
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition placeholder-gray-400 resize-none"
+                  placeholder="Yetkazib berish manzilingizni kiriting"
                   rows="3"
                   required
                 />
               </div>
-              <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-lg border border-purple-100">
-                <p className="text-sm text-gray-700 mb-2">
-                  <strong>To'lov kartasi:</strong>
+              <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-xl border border-purple-100">
+                <p className="text-sm font-semibold text-gray-700 mb-1.5 flex items-center gap-1.5">
+                  <FaCreditCard className="text-purple-500" />To'lov kartasi:
                 </p>
                 <p className="text-lg font-mono font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                   {cardNumber}
                 </p>
-                <p className="text-xs text-gray-600 mt-2">
+                <p className="text-xs text-gray-500 mt-1.5">
                   Bu karta raqamiga to'lov qiling va chekni Telegram botga yuboring
                 </p>
               </div>
             </div>
-            <div className="flex space-x-3 mt-6">
+
+            <div className="flex gap-3 px-6 pb-6 pt-2 border-t border-gray-100">
               <button
                 onClick={() => setShowCheckoutModal(false)}
-                className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="flex-1 px-4 py-2.5 text-sm font-semibold text-gray-600 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
                 Bekor qilish
               </button>
               <button
                 onClick={handleConfirmOrder}
-                className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 rounded-lg hover:shadow-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                className="flex-1 px-4 py-2.5 text-sm font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl hover:from-purple-700 hover:to-indigo-700 hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-100 focus:outline-none focus:ring-2 focus:ring-purple-400"
               >
                 Tasdiqlash
               </button>
@@ -227,8 +242,8 @@ const CartPage = () => {
 
       {/* Receipt Modal */}
       {showReceiptModal && orderDetails && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl transform transition-all duration-300">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 backdrop-fade">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl modal-enter">
             <div className="text-center mb-4">
               <FaCheckCircle className="text-6xl mb-4 mx-auto text-green-500 animate-pulse" />
               <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
