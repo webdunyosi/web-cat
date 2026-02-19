@@ -15,16 +15,42 @@
 @keyframes productFadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(32px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .product-fade-in {
-  animation: productFadeIn 0.5s ease-out both;
+  animation: productFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Modal entrance animation */
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-enter {
+  animation: modalEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Backdrop fade animation */
+@keyframes backdropFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.backdrop-fade {
+  animation: backdropFade 0.25s ease both;
 }
 
 /* Cart item fade-in animation */
