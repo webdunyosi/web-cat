@@ -70,8 +70,8 @@ const AdminLayout = ({ children }) => {
                   className={`
                     flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200
                     ${location.pathname === item.path
-                      ? 'bg-white text-purple-700 shadow-lg transform scale-105'
-                      : 'text-white hover:bg-purple-600 hover:shadow-md hover:transform hover:scale-105'
+                      ? 'bg-white text-purple-700 shadow-lg transform scale-105 ring-2 ring-purple-400'
+                      : 'text-white hover:bg-purple-600 hover:shadow-md hover:scale-105'
                     }
                   `}
                   onClick={() => setSidebarOpen(false)}
