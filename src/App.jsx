@@ -12,6 +12,7 @@ import OrdersPage from './pages/OrdersPage';
 import AboutPage from './pages/AboutPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminProductsPage from './pages/AdminProductsPage';
+import AdminUsersPage from './pages/AdminUsersPage';
 
 // Layouts
 import UserLayout from './layouts/UserLayout';
@@ -120,6 +121,16 @@ const App = () => {
                 <ProtectedRoute adminOnly>
                   <AdminLayout>
                     <OrdersPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/foydalanuvchilar"
+              element={
+                <ProtectedRoute adminOnly>
+                  <AdminLayout>
+                    <AdminUsersPage />
                   </AdminLayout>
                 </ProtectedRoute>
               }
