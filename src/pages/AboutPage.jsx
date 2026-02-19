@@ -1,11 +1,14 @@
 import React from 'react';
+import { FaCat, FaShoppingBag, FaTruck, FaCreditCard, FaGift, FaPhone, FaEnvelope, FaMapMarkerAlt, FaRobot } from 'react-icons/fa';
 
 const AboutPage = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-8 text-white text-center">
-          <h1 className="text-4xl font-bold mb-4">🐱 Web Cat Do'koni</h1>
+          <h1 className="text-4xl font-bold mb-4 flex items-center justify-center gap-2">
+            <FaCat /> Web Cat Do'koni
+          </h1>
           <p className="text-lg">Mushuklarning sevimli do'koni</p>
         </div>
 
@@ -23,28 +26,28 @@ const AboutPage = () => {
             <h2 className="text-2xl font-bold text-gray-800 mb-3">Bizning xizmatlarimiz</h2>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-purple-50 p-4 rounded-lg">
-                <div className="text-3xl mb-2">🛍️</div>
+                <FaShoppingBag className="text-3xl mb-2 text-purple-600" />
                 <h3 className="font-semibold text-gray-800 mb-2">Keng tanlov</h3>
                 <p className="text-gray-600 text-sm">
                   Mushuklar, ozuqalar va turli xil buyumlar uchun mahsulotlarning katta assortimenti
                 </p>
               </div>
               <div className="bg-purple-50 p-4 rounded-lg">
-                <div className="text-3xl mb-2">🚚</div>
+                <FaTruck className="text-3xl mb-2 text-purple-600" />
                 <h3 className="font-semibold text-gray-800 mb-2">Tez yetkazib berish</h3>
                 <p className="text-gray-600 text-sm">
                   Toshkent bo'ylab 24 soat ichida, boshqa hududlarga 2-3 kun ichida
                 </p>
               </div>
               <div className="bg-purple-50 p-4 rounded-lg">
-                <div className="text-3xl mb-2">💳</div>
+                <FaCreditCard className="text-3xl mb-2 text-purple-600" />
                 <h3 className="font-semibold text-gray-800 mb-2">Qulay to'lov</h3>
                 <p className="text-gray-600 text-sm">
                   Plastik kartalar orqali to'lov, Telegram bot orqali chekni yuborish
                 </p>
               </div>
               <div className="bg-purple-50 p-4 rounded-lg">
-                <div className="text-3xl mb-2">🎁</div>
+                <FaGift className="text-3xl mb-2 text-purple-600" />
                 <h3 className="font-semibold text-gray-800 mb-2">Aksiyalar</h3>
                 <p className="text-gray-600 text-sm">
                   Doimiy aksiyalar, chegirmalar va bonus dasturlarimiz
@@ -57,28 +60,28 @@ const AboutPage = () => {
             <h2 className="text-2xl font-bold text-gray-800 mb-3">Aloqa</h2>
             <div className="bg-gray-50 p-6 rounded-lg space-y-3">
               <div className="flex items-center space-x-3">
-                <span className="text-2xl">📱</span>
+                <FaPhone className="text-2xl text-purple-600" />
                 <div>
                   <p className="font-semibold text-gray-800">Telefon:</p>
                   <p className="text-gray-600">+998 90 123 45 67</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <span className="text-2xl">📧</span>
+                <FaEnvelope className="text-2xl text-purple-600" />
                 <div>
                   <p className="font-semibold text-gray-800">Email:</p>
                   <p className="text-gray-600">info@webcat.uz</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <span className="text-2xl">📍</span>
+                <FaMapMarkerAlt className="text-2xl text-purple-600" />
                 <div>
                   <p className="font-semibold text-gray-800">Manzil:</p>
                   <p className="text-gray-600">Toshkent shahri, Chilonzor tumani</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <span className="text-2xl">🤖</span>
+                <FaRobot className="text-2xl text-purple-600" />
                 <div>
                   <p className="font-semibold text-gray-800">Telegram Bot:</p>
                   <p className="text-gray-600">@webcat_uz_bot</p>

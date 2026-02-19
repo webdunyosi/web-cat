@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { sendOrderToTelegram } from '../services/telegramService';
+import { FaShoppingCart, FaTrash, FaCheckCircle, FaCreditCard } from 'react-icons/fa';
 
 const CartPage = () => {
   const { cart, removeFromCart, updateQuantity, getTotal, clearCart } = useCart();
@@ -67,7 +68,7 @@ const CartPage = () => {
 
       {cart.length === 0 ? (
         <div className="bg-white rounded-lg shadow-md p-12 text-center">
-          <div className="text-6xl mb-4">🛒</div>
+          <FaShoppingCart className="text-6xl mb-4 mx-auto text-gray-400" />
           <p className="text-xl text-gray-600 mb-4">Savatingiz bo'sh</p>
           <button
             onClick={() => navigate('/mahsulotlar')}
@@ -117,7 +118,7 @@ const CartPage = () => {
                     onClick={() => removeFromCart(item.id)}
                     className="ml-4 text-red-500 hover:text-red-700"
                   >
-                    🗑️
+                    <FaTrash />
                   </button>
                 </div>
               </div>
@@ -226,7 +227,7 @@ const CartPage = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <div className="text-center mb-4">
-              <div className="text-6xl mb-4">✅</div>
+              <FaCheckCircle className="text-6xl mb-4 mx-auto text-green-500" />
               <h2 className="text-2xl font-bold text-gray-800 mb-2">
                 Buyurtma qabul qilindi!
               </h2>
@@ -256,8 +257,8 @@ const CartPage = () => {
             </div>
 
             <div className="bg-purple-50 p-4 rounded-lg mb-4">
-              <p className="text-sm font-semibold text-gray-800 mb-2">
-                💳 To'lov ma'lumotlari:
+              <p className="text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                <FaCreditCard /> To'lov ma'lumotlari:
               </p>
               <p className="text-lg font-mono font-bold text-purple-600 mb-2">
                 {orderDetails.cardNumber}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import productsData from '../../data/products.json';
+import { FaStar, FaCat, FaDrumstickBite, FaBaseballBall, FaTimes } from 'react-icons/fa';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -17,10 +18,10 @@ const ProductsPage = () => {
     : products.filter(p => p.category === selectedCategory);
 
   const categories = [
-    { id: 'all', name: 'Hammasi', icon: '🌟' },
-    { id: 'mushuklar', name: 'Mushuklar', icon: '🐱' },
-    { id: 'ozuqalar', name: 'Ozuqalar', icon: '🍖' },
-    { id: 'buyumlar', name: 'Buyumlar', icon: '🎾' },
+    { id: 'all', name: 'Hammasi', icon: FaStar },
+    { id: 'mushuklar', name: 'Mushuklar', icon: FaCat },
+    { id: 'ozuqalar', name: 'Ozuqalar', icon: FaDrumstickBite },
+    { id: 'buyumlar', name: 'Buyumlar', icon: FaBaseballBall },
   ];
 
   const handleAddToCart = (product) => {
@@ -33,22 +34,25 @@ const ProductsPage = () => {
 
       {/* Category Filter */}
       <div className="flex flex-wrap gap-3 mb-8">
-        {categories.map(category => (
-          <button
-            key={category.id}
-            onClick={() => setSelectedCategory(category.id)}
-            className={`
-              flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors
-              ${selectedCategory === category.id
-                ? 'bg-purple-600 text-white'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
-              }
-            `}
-          >
-            <span>{category.icon}</span>
-            <span>{category.name}</span>
-          </button>
-        ))}
+        {categories.map(category => {
+          const IconComponent = category.icon;
+          return (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+              className={`
+                flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors
+                ${selectedCategory === category.id
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                }
+              `}
+            >
+              <IconComponent />
+              <span>{category.name}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Products Grid */}
@@ -108,7 +112,7 @@ const ProductsPage = () => {
                 onClick={() => setSelectedProduct(null)}
                 className="absolute top-4 right-4 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100"
               >
-                ✕
+                <FaTimes />
               </button>
               <img
                 src={selectedProduct.image}

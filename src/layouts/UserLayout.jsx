@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { FaCat, FaShoppingCart, FaShoppingBag, FaBox, FaInfoCircle, FaBars } from 'react-icons/fa';
 
 const UserLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -11,9 +12,9 @@ const UserLayout = ({ children }) => {
   const { cart } = useCart();
 
   const menuItems = [
-    { path: '/mahsulotlar', label: 'Mahsulotlar', icon: '🛍️' },
-    { path: '/buyurtmalar', label: 'Buyurtmalarim', icon: '📦' },
-    { path: '/haqida', label: 'Do\'kon Haqida', icon: 'ℹ️' },
+    { path: '/mahsulotlar', label: 'Mahsulotlar', icon: FaShoppingBag },
+    { path: '/buyurtmalar', label: 'Buyurtmalarim', icon: FaBox },
+    { path: '/haqida', label: 'Do\'kon Haqida', icon: FaInfoCircle },
   ];
 
   const handleLogout = () => {
@@ -32,13 +33,15 @@ const UserLayout = ({ children }) => {
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className="mr-4 md:hidden"
               >
-                <span className="text-2xl">☰</span>
+                <FaBars className="text-2xl" />
               </button>
-              <h1 className="text-2xl font-bold text-purple-600">🐱 Web Cat</h1>
+              <h1 className="text-2xl font-bold text-purple-600 flex items-center gap-2">
+                <FaCat /> Web Cat
+              </h1>
             </div>
             <div className="flex items-center space-x-4">
               <Link to="/savat" className="relative">
-                <span className="text-2xl">🛒</span>
+                <FaShoppingCart className="text-2xl" />
                 {cart.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                     {cart.length}
@@ -69,23 +72,26 @@ const UserLayout = ({ children }) => {
           `}
         >
           <nav className="p-4 space-y-2">
-            {menuItems.map(item => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`
-                  flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
-                  ${location.pathname === item.path
-                    ? 'bg-purple-100 text-purple-700'
-                    : 'text-gray-700 hover:bg-gray-100'
-                  }
-                `}
-                onClick={() => setSidebarOpen(false)}
-              >
-                <span className="text-xl">{item.icon}</span>
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            ))}
+            {menuItems.map(item => {
+              const IconComponent = item.icon;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`
+                    flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
+                    ${location.pathname === item.path
+                      ? 'bg-purple-100 text-purple-700'
+                      : 'text-gray-700 hover:bg-gray-100'
+                    }
+                  `}
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <IconComponent className="text-xl" />
+                  <span className="font-medium">{item.label}</span>
+                </Link>
+              );
+            })}
           </nav>
         </aside>
 
