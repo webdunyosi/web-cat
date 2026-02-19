@@ -25,7 +25,6 @@ const ProductsPage = () => {
 
   const handleAddToCart = (product) => {
     addToCart(product);
-    alert(`${product.name} savatga qo'shildi!`);
   };
 
   return (
