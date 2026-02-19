@@ -1,9 +1,7 @@
 const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
-export const sendOrderToTelegram = async (orderData) => {
-  const message = formatOrderMessage(orderData);
-  
+const sendMessageToTelegram = async (message) => {
   try {
     const response = await fetch(
       `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
@@ -31,34 +29,14 @@ export const sendOrderToTelegram = async (orderData) => {
   }
 };
 
+export const sendOrderToTelegram = async (orderData) => {
+  const message = formatOrderMessage(orderData);
+  return await sendMessageToTelegram(message);
+};
+
 export const sendRegistrationToTelegram = async (userData) => {
   const message = formatRegistrationMessage(userData);
-  
-  try {
-    const response = await fetch(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: 'HTML',
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error('Telegramga yuborishda xatolik');
-    }
-
-    return { success: true };
-  } catch (error) {
-    console.error('Telegram xatolik:', error);
-    return { success: false, error: error.message };
-  }
+  return await sendMessageToTelegram(message);
 };
 
 const formatOrderMessage = (orderData) => {
