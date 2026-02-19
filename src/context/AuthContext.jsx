@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { sendRegistrationToTelegram } from '../services/telegramService';
 
 const AuthContext = createContext(null);
 
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     return { success: false, error: 'Noto\'g\'ri login yoki parol' };
   };
 
-  const register = (userData) => {
+  const register = async (userData) => {
     // Simulate registration
     const newUser = {
       id: Date.now().toString(),
@@ -41,6 +42,15 @@ export const AuthProvider = ({ children }) => {
     };
     setUser(newUser);
     localStorage.setItem('user', JSON.stringify(newUser));
+    
+    // Send registration data to Telegram
+    try {
+      await sendRegistrationToTelegram(newUser);
+    } catch (error) {
+      console.error('Telegramga yuborishda xatolik:', error);
+      // Don't fail registration if Telegram fails
+    }
+    
     return { success: true };
   };
 
