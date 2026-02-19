@@ -68,45 +68,49 @@ const ProductsPage = () => {
         {filteredProducts.map((product, index) => (
           <div
             key={`${product.id}-${animationKey}`}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 group product-fade-in"
+            className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md hover:border-purple-200 transition-all duration-300 group product-fade-in"
             style={{
               animationDelay: `${Math.min(index * 0.1, 1.5)}s`
             }}
           >
-            <div className="relative overflow-hidden">
+            <div
+              className="relative overflow-hidden cursor-pointer"
+              onClick={() => setSelectedProduct(product)}
+              role="button"
+              aria-label={`${product.name} haqida batafsil ma'lumot`}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSelectedProduct(product);
+                }
+              }}
+            >
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-64 object-cover cursor-pointer transition-transform duration-500 group-hover:scale-110 relative z-10"
-                onClick={() => setSelectedProduct(product)}
-                role="button"
-                aria-label={`${product.name} haqida batafsil ma'lumot`}
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setSelectedProduct(product);
-                  }
-                }}
+                className="w-full h-56 object-cover transition-opacity duration-300 group-hover:opacity-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-purple-600 text-xs font-semibold px-3 py-1 rounded-full shadow-sm capitalize">
+                {product.category}
+              </span>
             </div>
             <div className="p-5">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
+              <h3 className="text-base font-semibold text-gray-800 mb-1 group-hover:text-purple-600 transition-colors line-clamp-1" title={product.name}>
                 {product.name}
               </h3>
-              <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+              <p className="text-gray-500 text-sm mb-4 line-clamp-2">
                 {product.description}
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                <span className="text-xl font-bold text-purple-600">
                   {product.price.toLocaleString()} so'm
                 </span>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-5 py-2 rounded-lg hover:shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-400 font-medium"
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400 font-medium text-sm"
                 >
-                  Savatga
+                  + Savatga
                 </button>
               </div>
             </div>
