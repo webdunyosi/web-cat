@@ -66,7 +66,7 @@ const UserLayout = ({ children }) => {
         {/* Sidebar */}
         <aside
           className={`
-            fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out mt-16
+            fixed inset-y-0 left-0 z-40 w-64 bg-gradient-to-b from-purple-600 to-purple-800 shadow-2xl transform transition-transform duration-300 ease-in-out mt-16
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:translate-x-0 md:mt-0
           `}
@@ -79,10 +79,10 @@ const UserLayout = ({ children }) => {
                   key={item.path}
                   to={item.path}
                   className={`
-                    flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
+                    flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200
                     ${location.pathname === item.path
-                      ? 'bg-purple-100 text-purple-700'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-white text-purple-700 shadow-lg transform scale-105 ring-2 ring-purple-400'
+                      : 'text-white hover:bg-purple-500 hover:shadow-md hover:scale-105'
                     }
                   `}
                   onClick={() => setSidebarOpen(false)}
