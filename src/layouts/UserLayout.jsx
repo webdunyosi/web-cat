@@ -25,34 +25,37 @@ const UserLayout = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 shadow-lg sticky top-0 z-50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="mr-4 md:hidden"
+                className="mr-4 md:hidden text-white hover:bg-white/20 p-2 rounded-lg transition-all duration-200"
               >
-                <FaBars className="text-2xl" />
+                <FaBars className="text-xl" />
               </button>
-              <h1 className="text-2xl font-bold text-purple-600 flex items-center gap-2">
-                <FaCat /> Web Cat
+              <h1 className="text-2xl font-bold text-white flex items-center gap-2 hover:scale-105 transition-transform duration-200">
+                <FaCat className="animate-pulse" /> Web Cat
               </h1>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link to="/savat" className="relative">
-                <FaShoppingCart className="text-2xl" />
+            <div className="flex items-center space-x-3 md:space-x-4">
+              <Link 
+                to="/savat" 
+                className="relative text-white hover:bg-white/20 p-2 rounded-lg transition-all duration-200 hover:scale-110"
+              >
+                <FaShoppingCart className="text-xl md:text-2xl" />
                 {cart.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shadow-lg animate-bounce">
                     {cart.length}
                   </span>
                 )}
               </Link>
-              <div className="flex items-center space-x-2">
-                <span className="hidden sm:inline text-sm text-gray-700">{user?.fullName || user?.username}</span>
+              <div className="flex items-center space-x-2 bg-white/10 rounded-full px-3 py-1.5 backdrop-blur-sm">
+                <span className="hidden sm:inline text-sm font-medium text-white">{user?.fullName || user?.username}</span>
                 <button
                   onClick={handleLogout}
-                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 text-sm"
+                  className="bg-white text-purple-600 px-4 py-1.5 rounded-full hover:bg-purple-50 text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-md"
                 >
                   Chiqish
                 </button>
