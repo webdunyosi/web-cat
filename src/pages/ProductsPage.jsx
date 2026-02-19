@@ -36,7 +36,7 @@ const ProductsPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent mb-8">
+      <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent mb-8 drop-shadow-sm">
         Mahsulotlar
       </h1>
 
@@ -49,10 +49,10 @@ const ProductsPage = () => {
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
               className={`
-                flex items-center space-x-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400
+                flex items-center space-x-2 px-5 py-2.5 rounded-xl font-medium transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400
                 ${selectedCategory === category.id
                   ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg ring-2 ring-purple-400'
-                  : 'bg-white text-gray-700 hover:bg-purple-50 hover:shadow-md shadow-sm'
+                  : 'bg-white/70 backdrop-blur-md border border-purple-100 text-gray-700 hover:bg-purple-50/80 hover:shadow-md shadow-sm'
                 }
               `}
             >
@@ -68,7 +68,7 @@ const ProductsPage = () => {
         {filteredProducts.map((product, index) => (
           <div
             key={`${product.id}-${animationKey}`}
-            className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md hover:border-purple-200 transition-all duration-300 group product-fade-in"
+            className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/60 shadow-md overflow-hidden hover:shadow-xl hover:border-purple-200 hover:-translate-y-1 transition-all duration-300 group product-fade-in"
             style={{
               animationDelay: `${Math.min(index * 0.1, 1.5)}s`
             }}
@@ -89,9 +89,15 @@ const ProductsPage = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-56 object-cover transition-opacity duration-300 group-hover:opacity-90"
+                className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-purple-600 text-xs font-semibold px-3 py-1 rounded-full shadow-sm capitalize">
+              {/* Hover/focus overlay with backdrop blur */}
+              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 backdrop-blur-[1px] flex items-end p-4" aria-hidden="true">
+                <span className="text-white text-sm font-medium transition-transform duration-300">
+                  Batafsil ko'rish →
+                </span>
+              </div>
+              <span className="absolute top-3 left-3 bg-white/80 backdrop-blur-md text-purple-600 text-xs font-semibold px-3 py-1 rounded-full shadow-sm capitalize border border-white/60">
                 {product.category}
               </span>
             </div>
@@ -108,7 +114,7 @@ const ProductsPage = () => {
                 </span>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400 font-medium text-sm"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-4 py-2 rounded-lg transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 font-medium text-sm"
                 >
                   + Savatga
                 </button>
@@ -119,7 +125,7 @@ const ProductsPage = () => {
       </div>
 
       {filteredProducts.length === 0 && (
-        <div className="text-center py-12 bg-white rounded-xl shadow-md">
+        <div className="text-center py-12 bg-white/70 backdrop-blur-sm rounded-xl shadow-md border border-white/60">
           <p className="text-gray-500 text-lg">Mahsulotlar topilmadi</p>
         </div>
       )}
@@ -127,11 +133,11 @@ const ProductsPage = () => {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-50 p-4 backdrop-fade"
           onClick={() => setSelectedProduct(null)}
         >
           <div
-            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-auto shadow-2xl transform transition-all duration-300"
+            className="bg-white/95 backdrop-blur-xl rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-auto shadow-2xl border border-white/60 modal-enter"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative overflow-hidden">
