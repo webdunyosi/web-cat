@@ -35,7 +35,7 @@ const AdminLayout = ({ children }) => {
                 <FaBars className="text-2xl" />
               </button>
               <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3 drop-shadow-lg">
-                <FaCat className="text-3xl md:text-4xl animate-pulse" /> 
+                <FaCat className="text-3xl md:text-4xl animate-pulse" />
                 <div className="flex flex-col">
                   <span>Web Cat Admin</span>
                   <span className="text-xs font-normal text-white/80 hidden sm:block">Boshqaruv paneli</span>

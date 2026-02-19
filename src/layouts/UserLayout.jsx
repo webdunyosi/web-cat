@@ -36,7 +36,7 @@ const UserLayout = ({ children }) => {
                 <FaBars className="text-2xl" />
               </button>
               <h1 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3 drop-shadow-lg">
-                <FaCat className="text-3xl md:text-4xl animate-pulse" /> 
+                <FaCat className="text-3xl md:text-4xl animate-pulse" />
                 <span className="hidden sm:inline">Web Cat</span>
               </h1>
             </div>
