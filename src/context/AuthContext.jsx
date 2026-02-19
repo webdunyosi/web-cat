@@ -41,13 +41,18 @@ export const AuthProvider = ({ children }) => {
       role: 'user'
     };
     
-    // Send registration info to Telegram
-    await sendRegistrationToTelegram({
-      fullName: userData.fullName,
-      username: userData.username,
-      email: userData.email,
-      phone: userData.phone
-    });
+    // Send registration info to Telegram (non-blocking)
+    try {
+      await sendRegistrationToTelegram({
+        fullName: userData.fullName,
+        username: userData.username,
+        email: userData.email,
+        phone: userData.phone
+      });
+    } catch (error) {
+      // Log error but don't block registration
+      console.error('Telegram notification failed:', error);
+    }
     
     setUser(newUser);
     localStorage.setItem('user', JSON.stringify(newUser));

@@ -70,7 +70,7 @@ export const sendRegistrationToTelegram = async (userData) => {
     );
 
     if (!response.ok) {
-      throw new Error('Telegramga yuborishda xatolik');
+      throw new Error(`Telegramga yuborishda xatolik: ${response.status} ${response.statusText}`);
     }
 
     return { success: true };
