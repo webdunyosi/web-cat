@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { sendRegistrationToTelegram } from '../services/telegramService';
 
 const AuthContext = createContext(null);
 
@@ -32,13 +33,22 @@ export const AuthProvider = ({ children }) => {
     return { success: false, error: 'Noto\'g\'ri login yoki parol' };
   };
 
-  const register = (userData) => {
+  const register = async (userData) => {
     // Simulate registration
     const newUser = {
       id: Date.now().toString(),
       ...userData,
       role: 'user'
     };
+    
+    // Send registration info to Telegram
+    await sendRegistrationToTelegram({
+      fullName: userData.fullName,
+      username: userData.username,
+      email: userData.email,
+      phone: userData.phone
+    });
+    
     setUser(newUser);
     localStorage.setItem('user', JSON.stringify(newUser));
     return { success: true };

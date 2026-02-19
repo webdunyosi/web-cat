@@ -22,7 +22,7 @@ const RegisterPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
@@ -36,7 +36,7 @@ const RegisterPage = () => {
       return;
     }
 
-    const result = register(formData);
+    const result = await register(formData);
     if (result.success) {
       navigate('/mahsulotlar');
     } else {
