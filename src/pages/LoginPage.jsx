@@ -90,8 +90,12 @@ const LoginPage = () => {
         </div>
 
         <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+          <p className="text-sm text-gray-600 text-center font-semibold mb-1">Demo kirish ma'lumotlari:</p>
           <p className="text-sm text-gray-600 text-center">
-            <strong>Demo:</strong> admin / admin123
+            <strong>Admin:</strong> admin / admin123
+          </p>
+          <p className="text-sm text-gray-600 text-center">
+            <strong>Foydalanuvchi:</strong> alisher_karimov / password123
           </p>
         </div>
       </div>
