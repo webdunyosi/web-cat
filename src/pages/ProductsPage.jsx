@@ -47,6 +47,7 @@ const ProductsPage = () => {
           return (
             <button
               key={category.id}
+              aria-label={category.name}
               onClick={() => setSelectedCategory(category.id)}
               className={`
                 flex items-center space-x-2 px-5 py-2.5 rounded-xl font-medium transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400
@@ -57,7 +58,7 @@ const ProductsPage = () => {
               `}
             >
               <IconComponent className="text-lg" />
-              <span>{category.name}</span>
+              <span className="hidden sm:inline">{category.name}</span>
             </button>
           );
         })}
