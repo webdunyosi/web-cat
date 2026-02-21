@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FaCat, FaChartBar, FaShoppingBag, FaBox, FaUsers, FaBars } from 'react-icons/fa';
+import { FaCat, FaChartBar, FaShoppingBag, FaBox, FaUsers, FaBars, FaTimes } from 'react-icons/fa';
 
 const AdminLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -60,6 +60,16 @@ const AdminLayout = ({ children }) => {
             md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:translate-x-0 md:mt-0
           `}
         >
+          <div className="flex items-center justify-between px-4 pt-4 pb-2 md:hidden">
+            <span className="text-white/80 text-xs font-semibold uppercase tracking-wider">Menyu</span>
+            <button
+              onClick={() => setSidebarOpen(false)}
+              className="text-white/80 hover:text-white hover:bg-white/20 p-1.5 rounded-lg transition-all duration-200"
+              aria-label="Yopish"
+            >
+              <FaTimes />
+            </button>
+          </div>
           <nav className="p-4 space-y-2 overflow-y-auto h-full">
             {menuItems.map(item => {
               const IconComponent = item.icon;

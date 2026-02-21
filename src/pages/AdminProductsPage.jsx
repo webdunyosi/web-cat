@@ -158,7 +158,7 @@ const AdminProductsPage = () => {
       <div className="bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Mahsulotlarni boshqarish</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Mahsulotlarni boshqarish</h1>
             <p className="text-purple-200 mt-1 text-sm">Barcha mahsulotlarni ko'ring, tahrirlang va boshqaring</p>
           </div>
           <button
@@ -172,7 +172,7 @@ const AdminProductsPage = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, idx) => {
           const Icon = stat.icon;
           return (
@@ -230,11 +230,11 @@ const AdminProductsPage = () => {
           <table className="w-full">
             <thead>
               <tr className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-                <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Rasm</th>
-                <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Nomi</th>
-                <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Kategoriya</th>
-                <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Narxi</th>
-                <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Amallar</th>
+                <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Rasm</th>
+                <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Nomi</th>
+                <th className="hidden sm:table-cell px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Kategoriya</th>
+                <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Narxi</th>
+                <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Amallar</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -255,8 +255,8 @@ const AdminProductsPage = () => {
                       key={product.id}
                       className={`transition-colors duration-150 hover:bg-purple-50/50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}
                     >
-                      <td className="px-6 py-3.5">
-                        <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-gray-100 shadow-sm">
+                      <td className="px-3 sm:px-6 py-2 sm:py-3.5">
+                        <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl overflow-hidden border-2 border-gray-100 shadow-sm">
                           <img
                             src={product.image}
                             alt={product.name}
@@ -264,25 +264,25 @@ const AdminProductsPage = () => {
                           />
                         </div>
                       </td>
-                      <td className="px-6 py-3.5">
+                      <td className="px-3 sm:px-6 py-2 sm:py-3.5">
                         <p className="text-sm font-semibold text-gray-800">{product.name}</p>
-                        <p className="text-xs text-gray-400 truncate max-w-xs mt-0.5">{product.description}</p>
+                        <p className="hidden sm:block text-xs text-gray-400 truncate max-w-xs mt-0.5">{product.description}</p>
                       </td>
-                      <td className="px-6 py-3.5 whitespace-nowrap">
+                      <td className="hidden sm:table-cell px-6 py-3.5 whitespace-nowrap">
                         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ring-1 ${catCfg.color}`}>
                           {catCfg.label}
                         </span>
                       </td>
-                      <td className="px-6 py-3.5 whitespace-nowrap">
-                        <span className="text-sm font-bold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-lg">
+                      <td className="px-3 sm:px-6 py-2 sm:py-3.5 whitespace-nowrap">
+                        <span className="text-xs sm:text-sm font-bold text-purple-600 bg-purple-50 px-2 sm:px-2.5 py-1 rounded-lg">
                           {product.price.toLocaleString()} so'm
                         </span>
                       </td>
-                      <td className="px-6 py-3.5 whitespace-nowrap">
-                        <div className="flex items-center gap-2">
+                      <td className="px-3 sm:px-6 py-2 sm:py-3.5 whitespace-nowrap">
+                        <div className="flex items-center gap-1 sm:gap-2">
                           <button
                             onClick={() => openEditModal(product)}
-                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors duration-150"
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 sm:px-3 py-1.5 rounded-lg transition-colors duration-150"
                             title="Tahrirlash"
                           >
                             <FaEdit />
@@ -290,7 +290,7 @@ const AdminProductsPage = () => {
                           </button>
                           <button
                             onClick={() => handleDelete(product.id)}
-                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition-colors duration-150"
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 px-2 sm:px-3 py-1.5 rounded-lg transition-colors duration-150"
                             title="O'chirish"
                           >
                             <FaTrash />
