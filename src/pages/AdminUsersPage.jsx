@@ -113,7 +113,7 @@ const AdminUsersPage = () => {
       {/* Page Header */}
       <div className="bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">
             <FaUsersIcon /> Foydalanuvchilarni boshqarish
           </h1>
           <p className="text-purple-200 mt-1 text-sm">Tizimda ro'yxatdan o'tgan barcha foydalanuvchilar</p>
@@ -193,11 +193,11 @@ const AdminUsersPage = () => {
             <table className="w-full">
               <thead>
                 <tr className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">ID</th>
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Foydalanuvchi</th>
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Aloqa ma'lumotlari</th>
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Rol</th>
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Ro'yxatdan o'tgan</th>
+                  <th className="hidden md:table-cell px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">ID</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Foydalanuvchi</th>
+                  <th className="hidden md:table-cell px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Aloqa ma'lumotlari</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Rol</th>
+                  <th className="hidden md:table-cell px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Ro'yxatdan o'tgan</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -206,11 +206,11 @@ const AdminUsersPage = () => {
                     key={user.id}
                     className={`transition-colors duration-150 hover:bg-purple-50/50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}
                   >
-                    <td className="px-6 py-3.5 whitespace-nowrap">
+                    <td className="hidden md:table-cell px-6 py-3.5 whitespace-nowrap">
                       <span className="text-sm font-mono font-semibold text-gray-500">#{user.id}</span>
                     </td>
-                    <td className="px-6 py-3.5">
-                      <div className="flex items-center gap-3">
+                    <td className="px-4 sm:px-6 py-2 sm:py-3.5">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <div
                           className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-violet-600 flex items-center justify-center text-white font-bold shadow-md flex-shrink-0"
                           aria-label={`Avatar for ${user.fullName || user.username}`}
@@ -220,10 +220,13 @@ const AdminUsersPage = () => {
                         <div className="min-w-0">
                           <p className="text-sm font-semibold text-gray-800 truncate">{user.fullName || user.username}</p>
                           <p className="text-xs text-gray-400">@{user.username}</p>
+                          {user.email && (
+                            <p className="text-xs text-gray-400 truncate md:hidden">{user.email}</p>
+                          )}
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-3.5">
+                    <td className="hidden md:table-cell px-6 py-3.5">
                       <div className="space-y-1">
                         {user.email && (
                           <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -239,10 +242,10 @@ const AdminUsersPage = () => {
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-3.5 whitespace-nowrap">
+                    <td className="px-4 sm:px-6 py-2 sm:py-3.5 whitespace-nowrap">
                       {getRoleBadge(user.role)}
                     </td>
-                    <td className="px-6 py-3.5 whitespace-nowrap">
+                    <td className="hidden md:table-cell px-6 py-3.5 whitespace-nowrap">
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <FaCalendar className="text-gray-400" />
                         <span>{formatDate(user.registrationDate)}</span>

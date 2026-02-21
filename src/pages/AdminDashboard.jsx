@@ -108,7 +108,7 @@ const AdminDashboard = () => {
       <div className="bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">
               <FaChartLine /> Dashboard
             </h1>
             <p className="text-purple-200 mt-1 text-sm">Tizim umumiy ko'rsatkichlari va so'nggi faoliyat</p>
@@ -117,7 +117,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {statCards.map((stat, idx) => {
           const Icon = stat.icon;
           return (
@@ -179,11 +179,11 @@ const AdminDashboard = () => {
             <table className="w-full">
               <thead>
                 <tr className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Buyurtma ID</th>
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Mijoz</th>
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Mahsulotlar</th>
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Jami</th>
-                  <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Buyurtma ID</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Mijoz</th>
+                  <th className="hidden sm:table-cell px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Mahsulotlar</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Jami</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-3.5 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -195,24 +195,24 @@ const AdminDashboard = () => {
                       key={order.orderId}
                       className={`transition-colors duration-150 hover:bg-purple-50/50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}
                     >
-                      <td className="px-6 py-3.5 whitespace-nowrap">
-                        <span className="text-sm font-mono font-semibold text-gray-700">#{order.orderId.slice(-6)}</span>
+                      <td className="px-3 sm:px-6 py-2 sm:py-3.5 whitespace-nowrap">
+                        <span className="text-xs sm:text-sm font-mono font-semibold text-gray-700">#{order.orderId.slice(-6)}</span>
                       </td>
-                      <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-800">
+                      <td className="px-3 sm:px-6 py-2 sm:py-3.5 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-800">
                         {order.customerName}
                       </td>
-                      <td className="px-6 py-3.5 text-sm text-gray-600">
+                      <td className="hidden sm:table-cell px-6 py-3.5 text-sm text-gray-600">
                         <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-xs font-medium">
                           {order.items.length} ta mahsulot
                         </span>
                       </td>
-                      <td className="px-6 py-3.5 whitespace-nowrap">
-                        <span className="text-sm font-bold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-lg">
+                      <td className="px-3 sm:px-6 py-2 sm:py-3.5 whitespace-nowrap">
+                        <span className="text-xs sm:text-sm font-bold text-purple-600 bg-purple-50 px-2 sm:px-2.5 py-1 rounded-lg">
                           {order.total.toLocaleString()} so'm
                         </span>
                       </td>
-                      <td className="px-6 py-3.5 whitespace-nowrap">
-                        <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${status.className}`}>
+                      <td className="px-3 sm:px-6 py-2 sm:py-3.5 whitespace-nowrap">
+                        <span className={`inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold ${status.className}`}>
                           <StatusIcon className="text-[10px]" />
                           {status.label}
                         </span>
