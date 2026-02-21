@@ -83,7 +83,7 @@ const CartPage = () => {
             {cart.map((item, index) => (
               <div
                 key={item.id}
-                className="flex items-center p-4 border-b last:border-b-0 hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50 transition-all duration-300 cart-item-fade-in"
+                className="flex flex-col sm:flex-row sm:items-center p-4 border-b last:border-b-0 hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50 transition-all duration-300 cart-item-fade-in"
                 style={{
                   animationDelay: `${index * 0.1}s`
                 }}
@@ -91,9 +91,9 @@ const CartPage = () => {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-24 h-24 object-cover rounded-lg shadow-md"
+                  className="w-full h-48 sm:w-24 sm:h-24 object-cover rounded-lg shadow-md"
                 />
-                <div className="flex-1 ml-4">
+                <div className="flex-1 mt-3 sm:mt-0 sm:ml-4">
                   <h3 className="text-lg font-semibold text-gray-800">
                     {item.name}
                   </h3>
@@ -101,22 +101,24 @@ const CartPage = () => {
                     {item.price.toLocaleString()} so'm
                   </p>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <button
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    className="w-8 h-8 bg-gradient-to-r from-purple-100 to-indigo-100 rounded hover:from-purple-200 hover:to-indigo-200 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-400 font-bold text-purple-600"
-                  >
-                    -
-                  </button>
-                  <span className="w-12 text-center font-medium text-gray-800">
-                    {item.quantity}
-                  </span>
-                  <button
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="w-8 h-8 bg-gradient-to-r from-purple-100 to-indigo-100 rounded hover:from-purple-200 hover:to-indigo-200 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-400 font-bold text-purple-600"
-                  >
-                    +
-                  </button>
+                <div className="flex items-center justify-between sm:justify-start mt-3 sm:mt-0">
+                  <div className="flex items-center space-x-3">
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      className="w-8 h-8 bg-gradient-to-r from-purple-100 to-indigo-100 rounded hover:from-purple-200 hover:to-indigo-200 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-400 font-bold text-purple-600"
+                    >
+                      -
+                    </button>
+                    <span className="w-12 text-center font-medium text-gray-800">
+                      {item.quantity}
+                    </span>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      className="w-8 h-8 bg-gradient-to-r from-purple-100 to-indigo-100 rounded hover:from-purple-200 hover:to-indigo-200 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-400 font-bold text-purple-600"
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
                     onClick={() => removeFromCart(item.id)}
                     className="ml-4 text-red-500 hover:text-red-700 transition-all duration-200 hover:scale-125 focus:outline-none focus:ring-2 focus:ring-red-400 rounded p-2"
@@ -243,7 +245,7 @@ const CartPage = () => {
       {/* Receipt Modal */}
       {showReceiptModal && orderDetails && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 backdrop-fade">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl modal-enter">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl modal-enter max-h-[90vh] overflow-y-auto">
             <div className="text-center mb-4">
               <FaCheckCircle className="text-6xl mb-4 mx-auto text-green-500 animate-pulse" />
               <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
